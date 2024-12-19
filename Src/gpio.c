@@ -52,6 +52,27 @@ void configure_gpio_for_usart(void)
 
 void configure_gpio(void)
 {
+<<<<<<< HEAD
+    // Habilitar reloj para GPIOA y GPIOC
+    *RCC_AHB2ENR |= (1 << 0); // Habilitar GPIOA
+    *RCC_AHB2ENR |= (1 << 2); // Habilitar GPIOC
+
+    // Configurar PA5 (LED) como salida
+    GPIOA->MODER &= ~(3U << (2 * 5));  // Limpiar bits de modo para PA5
+    GPIOA->MODER |= (1U << (2 * 5));   // Configurar PA5 como salida
+
+    // Configurar velocidad de PA5 (LED) a alta
+    GPIOA->OSPEEDR |= (3U << (2 * 5)); // Velocidad alta para PA5
+
+    // Configurar PA13 (botón) como entrada
+    GPIOC->MODER &= ~(3U << (2 * 13)); // Limpiar bits de modo para PA13
+    GPIOC->PUPDR &= ~(3U << (2 * 13)); // Configurar PA13 como sin pull-up, sin pull-down
+
+    // Configurar interrupción externa para el botón (PA13)
+    SYSCFG->CFGR1 |= (0x1 << (2 * 13)); // Conectar PA13 a la línea de interrupción EXTI13
+    EXTI->IMR1 |= (1 << BUTTON_PIN);    // Habilitar interrupción para el botón
+    EXTI->FTSR1 |= (1 << BUTTON_PIN);   // Configurar interrupción en flanco de bajada
+=======
    *RCC_AHB2ENR |= (1 << 0) | (1 << 2); // Enable clock for GPIOA and GPIOC
 
     // Configure PA5 as output
@@ -78,6 +99,7 @@ void configure_gpio(void)
     // Enable EXTI15_10 interrupt
     *NVIC_ISER1 |= (1 << (EXTI15_10_IRQn - 32));
     
+>>>>>>> b7d0d5e7b1c1bf0b15b9eb64d2afcdcab0e3338e
 }
 
 // Emula el comprtamiento de la puerta

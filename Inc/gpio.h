@@ -40,6 +40,15 @@ typedef struct {
 
 } GPIO_t;
 
+// Definiciones de registros de los periféricos
+#define GPIOA ((GPIO_t *)0x48000000)  // Dirección base de GPIOA
+#define GPIOB ((GPIO_t *)0x48000400)  // Dirección base de GPIOB
+#define GPIOC ((GPIO_t *)0x48000800)  // Dirección base de GPIOC
+#define SYSCFG_BASE 0x40010000
+#define SYSCFG ((SYSCFG_t *)SYSCFG_BASE)
+#define EXTI_BASE 0x40010400
+#define EXTI ((EXTI_t *)EXTI_BASE)
+
 // Funciones para configurar GPIOs
 void configure_gpio(void);
 
